@@ -48,6 +48,7 @@ def load_data(Directory):
 
     for tumor_directory in directories_testing.values():
         for filename in os.listdir(tumor_directory):
+            filepath = os.path.join(tumor_directory, filename)
             picture = cv2.imread(filepath)[:,:,:1]
             picture_resized = cv2.resize(picture, (255,255))
             X_test.append(picture_resized)
