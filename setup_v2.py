@@ -11,7 +11,7 @@ setup(
     description="Brain Tumor Classification Model",
     license="MIT",
     author="victorvone",
-    author_email="victorvoneisenhart@gmail.com",
+    author_email="",
     url="https://github.com/Victorvone/braintumorclassification",
     install_requires=requirements,
     packages=find_packages(),
