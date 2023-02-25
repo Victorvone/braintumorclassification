@@ -66,5 +66,3 @@ def load_data(Directory):
     print(f'X_test and y_test created successfully with shapes: \n X_test:{X_test.shape}\n y_train:{y_test.shape}')
 
     return X_train, y_train, X_test, y_test
-
-X_train, y_train, X_test, y_test = load_data('raw_data')
