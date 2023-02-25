@@ -1,3 +1,6 @@
+os
+pandas
+numpy
 opencv-python
 flake8
 black
