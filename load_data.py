@@ -48,6 +48,7 @@ def load_data(Directory):
 
     for tumor_directory in directories_testing.values():
         for filename in os.listdir(tumor_directory):
+            filepath = os.path.join(tumor_directory, filename)
             picture = cv2.imread(filepath)[:,:,:1]
             picture_resized = cv2.resize(picture, (255,255))
             X_test.append(picture_resized)
@@ -66,3 +67,6 @@ def load_data(Directory):
     print(f'X_test and y_test created successfully with shapes: \n X_test:{X_test.shape}\n y_train:{y_test.shape}')
 
     return X_train, y_train, X_test, y_test
+
+
+load_data('raw_data')
