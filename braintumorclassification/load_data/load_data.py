@@ -71,7 +71,7 @@ def shuffle_and_format(X, y):
     return X, y
 
 
-def make_data_sets(directory):
+def make_data_sets(directory=None):
     source = os.environ.get("DATA_SOURCE")
 
     if source == "gcloud":
