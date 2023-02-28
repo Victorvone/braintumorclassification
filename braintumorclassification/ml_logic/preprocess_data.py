@@ -4,11 +4,12 @@ from tensorflow.keras.utils import to_categorical
 
 def preprocess(X_train, y_train, X_test, y_test):
 
-    #Normalizing
-    X_train_preproc = X_train/255
-    X_test_preproc = X_test/255
+    'preprocess data'
+    # Normalizing
+    X_train_preproc = X_train / 255
+    X_test_preproc = X_test / 255
 
-    #OneHotEncoding
+    # OneHotEncoding
     y_train_preproc = to_categorical(y_train, 4)
     y_test_preproc = to_categorical(y_test, 4)
 
