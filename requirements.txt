@@ -5,4 +5,5 @@ opencv-python
 flake8
 black
 pre-commit
+tensorflow
 google.cloud.storage
