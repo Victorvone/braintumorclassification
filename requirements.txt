@@ -1,9 +1,8 @@
-os
 pandas
 numpy
 opencv-python
 flake8
 black
 pre-commit
+google-cloud-storage
 tensorflow
-google.cloud.storage
