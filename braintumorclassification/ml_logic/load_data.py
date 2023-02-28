@@ -58,12 +58,14 @@ def load_data_local(directory, set):
 
 
 def shuffle_and_format(X, y):
-    ### shuffle data
+    """
+    shuffles the training data and converts it into np arrays
+    """
+
     c = list(zip(X, y))
     np.random.shuffle(c)
     X, y = zip(*c)
 
-    ### format data to array
     X = np.array(X)
     X = np.expand_dims(X, axis=3)
     y = np.array(y)
@@ -72,6 +74,11 @@ def shuffle_and_format(X, y):
 
 
 def load_shuffle_format_dataset(directory=None):
+    """
+    loads the data from the data source specified by the DATA_SOURCE env variable into lists,
+    shuffles them and converts them to np arrays
+    """
+
     source = os.environ.get("DATA_SOURCE")
 
     if source == "gcloud":
