@@ -1,3 +1,12 @@
 raw_data/
 .python-version
 .env
+
+.vscode/
+braintumorclassification/ml_logic/mlruns/
+braintumorclassification/notebooks/.ipynb_checkpoints/restnet50_aurel-checkpoint.ipynb
+build/
+dist/
+models/
+
+braintumorclassification/.DS_Store
