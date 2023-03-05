@@ -1,10 +1,8 @@
-import numpy as np
 from tensorflow.keras.utils import to_categorical
 
 
 def preprocess(X_train, y_train, X_test, y_test):
-
-    'preprocess data'
+    "preprocess data"
     # Normalizing
     X_train_preproc = X_train / 255
     X_test_preproc = X_test / 255
