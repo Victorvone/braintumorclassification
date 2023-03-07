@@ -5,7 +5,16 @@ flake8
 black
 pre-commit
 google-cloud-storage
+<<<<<<< HEAD
 tf-explain
+=======
+mlflow
+colorama
+glob2
+time
+pickle
+streamlit
+>>>>>>> 829673f1940f57eec99f86cc0f01af4ecf609610
 
 # Install the version of Tensorflow depending on your processor: darwin == Mac, ARM == M1
 tensorflow-macos==2.10.0; sys_platform == 'darwin' and 'ARM' in platform_version # Mac M-chips
