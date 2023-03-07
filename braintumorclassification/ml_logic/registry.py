@@ -9,16 +9,6 @@ import pickle
 from colorama import Fore, Style
 
 from tensorflow.keras import Model, models
-from tensorflow.keras.layers import Lambda, Input
-
-inp = Input((64, 64, 1))
-out = Lambda(lambda x: x)(inp)
-model = Model(inp, out)
-
-dummy_model = model
-
-mlflow.set_tracking_uri("https://mlflow.lewagon.ai")
-mlflow.set_experiment(experiment_name="braintumorclassification")
 
 
 def save_model(model: Model = None, params: dict = None, metrics: dict = None) -> None:
@@ -51,7 +41,7 @@ def save_model(model: Model = None, params: dict = None, metrics: dict = None) -
             # STEP 3: push model to mlflow
             if model is not None:
                 log_model(
-                    model=dummy_model,
+                    model=model,
                     artifact_path="dummy_model",
                     registered_model_name="braintumorclassification",
                 )
@@ -130,20 +120,3 @@ def load_model() -> Model:
     print("\n✅ model loaded from disk")
 
     return model
-
-
-# def save_model():
-#
-#    with mlflow.start_run():
-#
-#        params = dict(batch_size=000, row_count=000)
-#        metrics = dict(accuracy=0000)
-#
-#        mlflow.log_params(params)
-#        mlflow.log_metrics(metrics)
-#
-#        log_model(model=dummy_model,
-#                  artifact_path="dummy_model",
-#                  registered_model_name="braintumorclassification")
-#
-#        return None
