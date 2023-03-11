@@ -62,3 +62,30 @@ def predict_and_explain(model,
         grid_vanillagrad = None
 
     return prediction, grid_actviz, grid_gradcam, grid_occsens, grid_vanillagrad
+
+
+def predict_and_gradcam(model,
+                        image,
+                        layers_name=None):
+
+    '''Returns prediction of tumor classification, Activation visualizations, Grad-CAM, Occlusion sensitivity
+    and Vanilla gradient. It also saves pictures in ../visualizations folder. Image needs to follow the shape: none, 255, 255, 3'''
+
+    # Prediction
+    prediction = model.predict(image)
+    class_index = np.argmax(prediction)
+
+    # Format prediction to required format for explanations
+    def format_for_expl(image, class_index):
+        X = image
+        y = np.expand_dims(np.array([class_index]), axis=0)
+        return (X, y)
+
+    image_tuple = format_for_expl(image, class_index)
+
+    # Grad-CAM
+    gradcam = GradCAM()
+    grid_gradcam = gradcam.explain(image_tuple, model, class_index=class_index)
+    gradcam.save(grid_gradcam, "../Visualizations/", "GradCam.png")
+
+    return prediction, grid_gradcam
