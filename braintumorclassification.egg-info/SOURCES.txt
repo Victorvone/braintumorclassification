@@ -9,8 +9,13 @@ braintumorclassification.egg-info/requires.txt
 braintumorclassification.egg-info/top_level.txt
 braintumorclassification/api/__init__.py
 braintumorclassification/api/fast.py
+braintumorclassification/api/prediction.py
 braintumorclassification/interface/__init__.py
 braintumorclassification/interface/main.py
 braintumorclassification/ml_logic/__init__.py
 braintumorclassification/ml_logic/load_data.py
+braintumorclassification/ml_logic/model.py
+braintumorclassification/ml_logic/params.py
+braintumorclassification/ml_logic/predict_and_explain.py
 braintumorclassification/ml_logic/preprocess_data.py
+braintumorclassification/ml_logic/registry.py

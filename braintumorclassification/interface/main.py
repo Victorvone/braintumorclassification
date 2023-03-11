@@ -1,5 +1,5 @@
 from braintumorclassification.ml_logic.model import initialize_model, compile_model, train_model, evaluate_model
-from braintumorclassification.ml_logic.registry import load_model
+from braintumorclassification.ml_logic.registry import load_model, save_model
 from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
 from braintumorclassification.ml_logic.load_data import load_train_data, load_test_data
 from braintumorclassification.ml_logic.params import LEARNING_RATE, METRIC, BATCH_SIZE, EPOCHS
@@ -14,7 +14,7 @@ def train():
     Compute validation metrics
     """
     # Load train data
-    train_ds, val_ds = load_train_data()
+    train_ds, val_ds = load_train_data('braintumorclassification/raw_data')
 
     # Initialize model
     model = initialize_model()
@@ -25,7 +25,11 @@ def train():
     # Train model
     model, history = train_model(model, train_ds, val_ds, batch_size=BATCH_SIZE, epochs=EPOCHS)
 
+    params = {'batch_size': BATCH_SIZE}
+    metrics = {'accuracy': history[1]}
+
     # Save model
+    save_model(model, params, metrics)
 
     return None
 
@@ -36,7 +40,7 @@ def evaluate():
     """
 
     # Load test data
-    test_ds = load_test_data()
+    test_ds = load_test_data('braintumorclassification/raw_data')
 
     # Load model
     model = load_model()
@@ -45,19 +49,19 @@ def evaluate():
     return metrics
 
 
-def pred(image: np.array()):
-    """
-    Make a prediction using the latest trained model
-    """
-    # Load model
-    model = load_model()
+# def pred(image: np.array()):
+#     """
+#     Make a prediction using the latest trained model
+#     """
+#     # Load model
+#     model = load_model()
 
-    # Predict and explain
-    prediction , grid_gradcam = predict_and_gradcam(model, image)
-    return prediction , grid_gradcam
+#     # Predict and explain
+#     prediction , grid_gradcam = predict_and_gradcam(model, image)
+#     return prediction , grid_gradcam
 
 
-if __name__ == "__main__":
-    train()
-    pred()
-    evaluate()
+# if __name__ == "__main__":
+#     train()
+#     pred()
+#     evaluate()

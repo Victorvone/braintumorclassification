@@ -1,12 +1,12 @@
 
 run_train:
-	python -c 'from taxifare.interface.main import train; train()'
+	python -c 'from braintumorclassification.interface.main import train; train()'
 
 run_pred:
-	python -c 'from taxifare.interface.main import pred; pred()'
+	python -c 'from braintumorclassification.interface.main import pred; pred()'
 
 run_evaluate:
-	python -c 'from taxifare.interface.main import evaluate; evaluate()'
+	python -c 'from braintumorclassification.interface.main import evaluate; evaluate()'
 
 run_all: run_train run_pred run_evaluate
 
