@@ -10,6 +10,8 @@ from colorama import Fore, Style
 
 from tensorflow.keras import Model, models
 
+import gdown
+
 
 def save_model(model: Model = None, params: dict = None, metrics: dict = None) -> None:
     """
@@ -85,6 +87,8 @@ def load_model() -> Model:
     """
     load the latest saved model, return None if no model found
     """
+
+    # load model from mlflow
     if os.environ.get("MODEL_TARGET") == "mlflow":
         stage = "Production"
 
@@ -92,7 +96,6 @@ def load_model() -> Model:
             Fore.BLUE + f"\nLoad model {stage} stage from mlflow..." + Style.RESET_ALL
         )
 
-        # load model from mlflow
         mlflow_tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
 
         mlflow.set_tracking_uri(mlflow_tracking_uri)
@@ -102,6 +105,21 @@ def load_model() -> Model:
         model = mlflow.keras.load_model(model_uri=model_uri)
 
         print("\n✅ model loaded from Mlflow")
+        return model
+
+    # load model from gdrive
+    if os.environ.get("MODEL_TARGET") == "gdrive":
+        stage = "Production"
+
+        print(Fore.BLUE + f"\nLoad model {stage} stage from gdriv..." + Style.RESET_ALL)
+
+        url = "https://drive.google.com/file/d/1-2UUABb2fBQwCL8rpigP6cnOJlGZcGDL/view?usp=share_link"
+        output_path = "./models/ResNet50v2.h5"
+        gdown.download(url, output_path, quiet=False, fuzzy=True)
+        model = models.load_model(output_path, compile=False)
+
+        print("\n✅ model loaded from gdrive")
+
         return model
 
     print(Fore.BLUE + "\nLoad model from local disk..." + Style.RESET_ALL)
