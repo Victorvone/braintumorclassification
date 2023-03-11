@@ -44,7 +44,7 @@ def save_model(model: Model = None, params: dict = None, metrics: dict = None) -
             if model is not None:
                 log_model(
                     model=model,
-                    artifact_path="dummy_model",
+                    artifact_path="EfficientNet",
                     registered_model_name="braintumorclassification",
                 )
 
@@ -113,8 +113,8 @@ def load_model() -> Model:
 
         print(Fore.BLUE + f"\nLoad model {stage} stage from gdriv..." + Style.RESET_ALL)
 
-        url = "https://drive.google.com/file/d/1-2UUABb2fBQwCL8rpigP6cnOJlGZcGDL/view?usp=share_link"
-        output_path = "./models/ResNet50v2.h5"
+        url = "https://drive.google.com/file/d/1KgwApM4Xpoy1LzxWtLR1jo95vhTVpjrH/view?usp=share_link"
+        output_path = "./models/EfficientNetv2.h5"
         gdown.download(url, output_path, quiet=False, fuzzy=True)
         model = models.load_model(output_path, compile=False)
 
