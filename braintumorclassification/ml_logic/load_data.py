@@ -1,102 +1,31 @@
-import os
-import numpy as np
-import cv2
-from google.cloud import storage
+from tensorflow.keras.utils import image_dataset_from_directory
 
 
-def load_data_gcloud(set):
+def load_data(directory):
     """
-    loads data from the project's google cloud bucket
+    loads data from a local directory
     """
 
-    X, y = [], []
-    target = 0
-    folders = ["no_tumor", "meningioma_tumor", "glioma_tumor", "pituitary_tumor"]
-
-    # Instantiates a client
-    storage_client = storage.Client()
-
-    # Get GCS bucket
-    bucket = storage_client.get_bucket(os.environ.get("BUCKET"))
-
-    for folder in folders:
-        for image in list(bucket.list_blobs(prefix=f"{set}/{folder}")):
-            picture = cv2.imdecode(
-                np.frombuffer(image.download_as_bytes(), np.uint8), -1
-            )
-            picture_resized = cv2.resize(picture, (255, 255))
-            X.append(picture_resized)
-            y.append(target)
-        target += 1
-
-    return X, y
-
-
-def load_data_local(directory, set):
-    """
-    loads data from the local directory
-    """
-
-    X, y = [], []
-    directories = {}
-    target = 0
-
-    for foldername in os.listdir(f"{directory}/{set}"):
-        if not foldername.startswith("."):
-            directories[foldername] = f"{directory}/{set}/{foldername}"
-
-    for tumor_directory in directories.values():
-        for filename in os.listdir(tumor_directory):
-            filepath = os.path.join(tumor_directory, filename)
-            picture = cv2.imread(filepath)[:, :, :1]
-            picture_resized = cv2.resize(picture, (255, 255))
-            X.append(picture_resized)
-            y.append(target)
-        target += 1
-
-    return X, y
-
-
-def shuffle_and_format(X, y):
-    """
-    shuffles the training data and converts it into np arrays
-    """
-
-    c = list(zip(X, y))
-    np.random.shuffle(c)
-    X, y = zip(*c)
-
-    X = np.array(X)
-    X = np.expand_dims(X, axis=3)
-    y = np.array(y)
-
-    return X, y
-
-
-def load_shuffle_format_dataset(directory=None):
-    """
-    loads the data from the data source specified by the DATA_SOURCE env variable into lists,
-    shuffles them and converts them to np arrays
-    """
-
-    source = os.environ.get("DATA_SOURCE")
-
-    if source == "gcloud":
-        X_train, y_train = load_data_gcloud("Training")
-        X_test, y_test = load_data_gcloud("Testing")
-
-    else:
-        X_train, y_train = load_data_local(directory, "Training")
-        X_test, y_test = load_data_local(directory, "Testing")
-
-    X_train, y_train = shuffle_and_format(X_train, y_train)
-    X_test, y_test = shuffle_and_format(X_test, y_test)
-
-    print(
-        f"X_train and y_train created successfully from {source} with shapes: \n X_train:{X_train.shape}\n y_train:{y_train.shape}"
-    )
-    print(
-        f"X_test and y_test created successfully from {source} with shapes: \n X_test:{X_test.shape}\n y_test:{y_test.shape}"
+    train_ds, val_ds = image_dataset_from_directory(
+        f"{directory}/Training",
+        labels="inferred",
+        label_mode="categorical",
+        seed=123,
+        image_size=(255, 255),
+        validation_split=0.2,
+        subset="both",
+        color_mode="rgb",
+        batch_size=64,
     )
 
-    return X_train, y_train, X_test, y_test
+    test_ds = image_dataset_from_directory(
+        f"{directory}/Testing",
+        labels="inferred",
+        label_mode="categorical",
+        seed=123,
+        image_size=(255, 255),
+        color_mode="rgb",
+        batch_size=64,
+    )
+
+    return train_ds, val_ds, test_ds
