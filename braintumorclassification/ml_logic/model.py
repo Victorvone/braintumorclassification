@@ -24,7 +24,7 @@ def initialize_model():
     return model
 
 
-def compile_model(model: Model, learning_rate: float):
+def compile_model(model: Model, learning_rate: float, metric):
     """
     Compile the Neural Network
     """
@@ -32,7 +32,7 @@ def compile_model(model: Model, learning_rate: float):
 
     model.compile(loss='categorical_crossentropy',
                   optimizer=optimizer,
-                  metrics=['accuracy'])
+                  metrics=metric)
 
     print("\n✅ model compiled")
     return model
@@ -40,7 +40,9 @@ def compile_model(model: Model, learning_rate: float):
 
 def train_model(model: Model,
                 train_ds,
-                val_ds):
+                val_ds,
+                batch_size: int,
+                epochs: int):
     """
     Fit model and return a the tuple (fitted_model, history)
     """
@@ -50,8 +52,8 @@ def train_model(model: Model,
 
     history = model.fit(train_ds,
                         validation_data=val_ds,
-                        batch_size=64,
-                        epochs=100,
+                        batch_size=batch_size,
+                        epochs=epochs,
                         callbacks=[es],
                         verbose=1)
 
@@ -60,14 +62,15 @@ def train_model(model: Model,
 
 
 def evaluate_model(model: Model,
-                   test_ds):
+                   test_ds,
+                   metric):
     """
     Evaluate trained model performance on dataset
     """
     metrics = model.evaluate(test_ds)
     loss = metrics["loss"]
-    accuracy = metrics["accuracy"]
+    metric_result = metrics[metric]
 
-    print(f"\n✅ model evaluated: loss {round(loss, 2)} mae {round(accuracy, 2)}")
+    print(f"\n✅ model evaluated: loss {round(loss, 2)} {metric} {round(metric_result, 2)}")
 
     return metrics
