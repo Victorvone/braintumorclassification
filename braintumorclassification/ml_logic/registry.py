@@ -1,6 +1,6 @@
 import mlflow
 from mlflow.keras import log_model
-
+import ipdb
 import glob2
 import time
 import os
@@ -108,7 +108,6 @@ def load_model() -> Model:
 
     # get latest model version
     model_directory = os.path.join(os.environ.get("LOCAL_REGISTRY_PATH"), "models")
-
     results = glob2.glob(f"{model_directory}/*")
     if not results:
         return None
@@ -118,5 +117,4 @@ def load_model() -> Model:
 
     model = models.load_model(model_path)
     print("\n✅ model loaded from disk")
-
     return model
