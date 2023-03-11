@@ -67,7 +67,6 @@ def predict_and_explain(model,
 def predict_and_gradcam(model,
                         image,
                         layers_name=None):
-
     '''Returns prediction of tumor classification, Activation visualizations, Grad-CAM, Occlusion sensitivity
     and Vanilla gradient. It also saves pictures in ../visualizations folder. Image needs to follow the shape: none, 255, 255, 3'''
 
@@ -86,6 +85,7 @@ def predict_and_gradcam(model,
     # Grad-CAM
     gradcam = GradCAM()
     grid_gradcam = gradcam.explain(image_tuple, model, class_index=class_index)
+    # maybe change class_index to variable +
     gradcam.save(grid_gradcam, "../Visualizations/", "GradCam.png")
 
-    return prediction, grid_gradcam
+    return prediction , grid_gradcam
