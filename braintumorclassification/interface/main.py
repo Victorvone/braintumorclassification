@@ -1,7 +1,9 @@
 from braintumorclassification.ml_logic.model import initialize_model, compile_model, train_model, evaluate_model
 from braintumorclassification.ml_logic.registry import load_model
 from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
+from braintumorclassification.ml_logic.load_data import load_train_data, load_test_data
 from braintumorclassification.ml_logic.params import LEARNING_RATE, METRIC, BATCH_SIZE, EPOCHS
+
 import numpy as np
 
 
@@ -12,6 +14,7 @@ def train():
     Compute validation metrics
     """
     # Load train data
+    train_ds, val_ds = load_train_data()
 
     # Initialize model
     model = initialize_model()
