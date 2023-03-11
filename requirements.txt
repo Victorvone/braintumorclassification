@@ -5,6 +5,10 @@ flake8
 black
 pre-commit
 google-cloud-storage
+fastapi
+Pillow
+python-multipart
+uvicorn
 tf-explain
 mlflow
 colorama
