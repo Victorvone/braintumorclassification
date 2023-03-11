@@ -5,6 +5,7 @@ flake8
 black
 pre-commit
 google-cloud-storage
+tf-explain
 mlflow
 colorama
 glob2
