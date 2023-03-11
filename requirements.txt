@@ -10,11 +10,11 @@ Pillow
 python-multipart
 uvicorn
 tf-explain
+python-time
 mlflow
 colorama
 glob2
-time
-pickle
+pickle-mixin
 streamlit
 gdown
 
