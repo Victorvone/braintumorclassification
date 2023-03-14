@@ -68,8 +68,8 @@ def evaluate_model(model: Model,
     Evaluate trained model performance on dataset
     """
     metrics = model.evaluate(test_ds)
-    loss = metrics["loss"]
-    metric_result = metrics[metric]
+    loss = metrics[0]
+    metric_result = metrics[1]
 
     print(f"\n✅ model evaluated: loss {round(loss, 2)} {metric} {round(metric_result, 2)}")
 

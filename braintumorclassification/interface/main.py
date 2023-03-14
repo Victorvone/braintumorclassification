@@ -61,7 +61,7 @@ def evaluate():
 #     return prediction , grid_gradcam
 
 
-# if __name__ == "__main__":
-#     train()
-#     pred()
-#     evaluate()
+if __name__ == "__main__":
+    train()
+    # pred()
+    evaluate()
