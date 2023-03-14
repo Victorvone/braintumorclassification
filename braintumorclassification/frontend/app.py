@@ -26,35 +26,67 @@ import time
 
 from img_classification import teachable_machine_classification
 
-st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App")
+
+
+im = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/brain.png')
+st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App", page_icon = im)
 
 col1, col2, col3 = st.columns([6,6,6])
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
+col1.write("")
 
-col1.markdown(" # Detect Brain MRI Scan")
+col1.title("Choose a brain MRI ...")
+uploaded_file = col1.file_uploader("", type="jpg")
+if uploaded_file:
 
-uploaded_file = col1.file_uploader("Choose a brain MRI ...", type="jpg")
-col2.success("MRI Scan was successfully uploaded!")
-col2.image(uploaded_file, use_column_width=True)
+    # Hide filename on UI
+    st.markdown('''
+        <style>
+            .uploadedFile {display: none}
+        <style>''',
+        unsafe_allow_html=True)
+    col2.header("Brain Scan")
+    col2.write("")
+    col2.write("")
 
-progress_bar = col2.progress(0)
+    col2.image(uploaded_file, use_column_width=True)
+    progress_bar = col2.progress(0)
+    for perc_completed in range(100):
+        time.sleep(0.005)
+        progress_bar.progress(perc_completed+1)
+    col2.write("")
+    col2.info("MRI Scan was successfully uploaded!", icon='✔')
 
-for perc_completed in range(100):
-    time.sleep(0.005)
-    progress_bar.progress(perc_completed+1)
 
-with col3:
     col3.header("Tumor Class")
+
+
+with col3, st.expander('Click Here to Classify MRI Scan!'):
+
 
     if uploaded_file is not None:
 
         image = Image.open(uploaded_file)
         image = image.resize((255, 255))
 
-        st.image(image, caption='Uploaded MRI.', use_column_width=True)
+        st.image(image, use_column_width=True)
 
         st.write("")
+        st.write("")
+        st.write("")
 
-        st.write("Classifying...")
+        #st.write("Classifying...")
 
         model_EfficientNetv2 = '/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/EfficientNetv2.h5'
 
@@ -62,15 +94,15 @@ with col3:
 
         if label == 0:
 
-            st.success("Meningioma has been detected!", icon='✅')
+            st.error("Meningioma has been detected!", icon ='☠')
 
         if label == 1:
 
-            st.write("Meningioma has been detected")
+            st.error("Meningioma has been detected", icon ='☠')
 
         if label == 3:
 
-            st.write("Pituitary has been detected")
+            st.error("Pituitary has been detected", icon ='☠')
 
 
         if label == 2:
