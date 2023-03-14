@@ -74,6 +74,8 @@ def predict_and_gradcam(model,
     prediction = model.predict(image)
     class_index = np.argmax(prediction)
 
+    print(f'Predicted class: {class_index}')
+
     # Format prediction to required format for explanations
     def format_for_expl(image, class_index):
         X = image
@@ -87,5 +89,6 @@ def predict_and_gradcam(model,
     grid_gradcam = gradcam.explain(image_tuple, model, class_index=class_index)
     # maybe change class_index to variable +
     gradcam.save(grid_gradcam, "../Visualizations/", "GradCam.png")
+    print('Gradcam created and saved in "../Visualizations/GradCam.png"')
 
     return prediction , grid_gradcam
