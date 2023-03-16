@@ -38,3 +38,7 @@ clean:
 	@rm -fr *.dist-info
 	@rm -fr *.egg-info
 	-@rm model.joblib
+
+download_data:
+	@gsutil -m cp -r gs://braintumorclassification/raw_data/Testing ./raw_data
+	@gsutil -m cp -r gs://braintumorclassification/raw_data/Training ./raw_data
