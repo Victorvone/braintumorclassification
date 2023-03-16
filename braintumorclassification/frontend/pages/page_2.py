@@ -5,6 +5,9 @@ from PIL import Image
 im = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/brain.png')
 st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App", page_icon = im)
 
+st.markdown("# Team 🧛‍♂️")
+st.sidebar.markdown("# Team 🧛‍♂️")
+
 col1, col2, col3, col4= st.columns([6,6,6,6])
 
 col1.header('Aydoğan Avcıoğlu')
