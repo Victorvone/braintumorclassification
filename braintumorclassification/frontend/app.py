@@ -3,7 +3,7 @@ import numpy as np
 import pydeck as pdk
 from io import StringIO
 from io import BytesIO
-from PIL import Image
+from PIL import Image, ImageDraw
 from PIL import ImageOps
 import cv2
 import tensorflow as tf
@@ -23,6 +23,7 @@ from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.models import load_model
 import requests
 import time
+
 
 from img_classification import teachable_machine_classification
 
@@ -123,23 +124,45 @@ with tab2:
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.header("Aydogan")
+        #st.header("Aydogan")
 
-        image = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/pages/aydogan.JPG')
+        image = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aydogan.JPG')
 
-        st.image(image, width=250)
-        col1.info('Phd Candidate in geoscience, working geospatial data science')
+        # Create container with centered image
+        with st.container():
+            st.markdown("<h1 style='text-align: center'>Aydogan</h1>", unsafe_allow_html=True)
+            col1.info('Geospatial data scientist')
+            st.markdown('[Github](https://github.com/aydogan22)')
+            st.image(image, use_column_width=True)
+
+
     with col2:
-        image2 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/pages/victor.JPG')
-        st.header("Victor")
+        image2 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/victor.JPG')
+        #st.header("Victor")
 
-        st.image(image2, width=250)
+        #st.image(image2, width=250)
+
+        with st.container():
+            st.markdown("<h1 style='text-align: center'>Victor</h1>", unsafe_allow_html=True)
+            st.image(image2, use_column_width=True)
         col2.info('Add Info')
     with col3:
-        st.header("Aurélien Biais")
-        image3 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/pages/aurelien.jpg')
-        st.image(image3, width=250)
+        #st.header("Aurélien Biais")
+        col3.write("")
+        col3.write("")
+        col3.write("")
+        image3 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aurelien.jpg')
+        with st.container():
+            st.markdown("<h1 style='text-align: center'>Aurélien Biais</h1>", unsafe_allow_html=True)
+            st.image(image3, use_column_width=True)
+        col3.info('Data Analytics Lead @recare')
+        st.markdown('[Recare](https://github.com/recare)')
+        #st.image(image3, width=250)
     with col4:
-        st.header("Aurélien Biais")
-        image4 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/pages/ivan.JPG')
-        st.image(image4, width=250)
+        #st.header("Aurélien Biais")
+        image4 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/ivan.JPG')
+        with st.container():
+            st.markdown("<h1 style='text-align: center'>Ivan Andjelkovic</h1>", unsafe_allow_html=True)
+            st.image(image4, use_column_width=True)
+        #st.image(image4, width=250)
+        col4.info('Add Info')
