@@ -2,9 +2,7 @@ from braintumorclassification.ml_logic.model import initialize_model, compile_mo
 from braintumorclassification.ml_logic.registry import load_model, save_model
 from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
 from braintumorclassification.ml_logic.load_data import load_train_data, load_test_data
-from braintumorclassification.ml_logic.params import LEARNING_RATE, METRIC, BATCH_SIZE, EPOCHS
-
-import numpy as np
+from braintumorclassification.ml_logic.params import LEARNING_RATE, METRIC, BATCH_SIZE, EPOCHS, FLIP, ZOOM
 
 
 def train():
@@ -17,7 +15,7 @@ def train():
     train_ds, val_ds = load_train_data('braintumorclassification/raw_data')
 
     # Initialize model
-    model = initialize_model()
+    model = initialize_model(flip=bool(FLIP), zoom=bool(ZOOM))
 
     # Compile model
     model = compile_model(model, learning_rate=LEARNING_RATE, metric=METRIC)

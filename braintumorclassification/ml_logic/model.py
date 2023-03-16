@@ -2,7 +2,8 @@ from tensorflow.keras.applications import EfficientNetV2B3
 from tensorflow.keras import layers, Sequential, optimizers, callbacks, Model
 
 
-def initialize_model():
+def initialize_model(zoom: bool,
+                     flip: bool):
     """
     Initialize the Neural Network with pretrained weights on EfficientNetV2B3
     """
@@ -13,6 +14,10 @@ def initialize_model():
                                   include_preprocessing=True)
 
     model = Sequential()
+    if zoom is True:
+        model.add(layers.RandomFlip(mode="vertical"))
+    if flip is True:
+        model. add(layers.RandomZoom(0.1))
     model.add(base_model)
     model.add(layers.Flatten())
     model.add(layers.Dense(64, activation = 'relu'))
