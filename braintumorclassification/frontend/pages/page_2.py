@@ -7,7 +7,7 @@ st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Exp
 
 col1, col2, col3, col4= st.columns([6,6,6,6])
 
-col1.header('Aydoğan Avcıoğlu, MSc')
+col1.header('Aydoğan Avcıoğlu')
 image = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/pages/aydogan.JPG')
 col1.image(image, caption='')
 col1.info('Phd Candidate in geoscience, working geospatial data science')
