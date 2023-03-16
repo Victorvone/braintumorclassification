@@ -1,4 +1,6 @@
 raw_data/
+raw_data_light/
+raw_data_test/
 .python-version
 .env
 .vscode/
@@ -9,3 +11,5 @@ dist/
 models/
 
 braintumorclassification/.DS_Store
+braintumorclassification.egg-info/*
+*/__pycache__/*
