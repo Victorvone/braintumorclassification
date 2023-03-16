@@ -9,16 +9,8 @@ import pickle
 from colorama import Fore, Style
 
 from tensorflow.keras import Model, models
-from tensorflow.keras.layers import Lambda, Input
 
-inp = Input((64, 64, 1))
-out = Lambda(lambda x: x)(inp)
-model = Model(inp, out)
-
-dummy_model = model
-
-mlflow.set_tracking_uri("https://mlflow.lewagon.ai")
-mlflow.set_experiment(experiment_name="braintumorclassification")
+import gdown
 
 
 def save_model(model: Model = None, params: dict = None, metrics: dict = None) -> None:
@@ -51,8 +43,8 @@ def save_model(model: Model = None, params: dict = None, metrics: dict = None) -
             # STEP 3: push model to mlflow
             if model is not None:
                 log_model(
-                    model=dummy_model,
-                    artifact_path="dummy_model",
+                    model=model,
+                    artifact_path="EfficientNet",
                     registered_model_name="braintumorclassification",
                 )
 
@@ -95,6 +87,8 @@ def load_model() -> Model:
     """
     load the latest saved model, return None if no model found
     """
+
+    # load model from mlflow
     if os.environ.get("MODEL_TARGET") == "mlflow":
         stage = "Production"
 
@@ -102,7 +96,6 @@ def load_model() -> Model:
             Fore.BLUE + f"\nLoad model {stage} stage from mlflow..." + Style.RESET_ALL
         )
 
-        # load model from mlflow
         mlflow_tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
 
         mlflow.set_tracking_uri(mlflow_tracking_uri)
@@ -112,6 +105,21 @@ def load_model() -> Model:
         model = mlflow.keras.load_model(model_uri=model_uri)
 
         print("\n✅ model loaded from Mlflow")
+        return model
+
+    # load model from gdrive
+    if os.environ.get("MODEL_TARGET") == "gdrive":
+        stage = "Production"
+
+        print(Fore.BLUE + f"\nLoad model {stage} stage from gdriv..." + Style.RESET_ALL)
+
+        url = "https://drive.google.com/file/d/1KgwApM4Xpoy1LzxWtLR1jo95vhTVpjrH/view?usp=share_link"
+        output_path = "./models/EfficientNetv2.h5"
+        gdown.download(url, output_path, quiet=False, fuzzy=True)
+        model = models.load_model(output_path, compile=False)
+
+        print("\n✅ model loaded from gdrive")
+
         return model
 
     print(Fore.BLUE + "\nLoad model from local disk..." + Style.RESET_ALL)
@@ -130,20 +138,3 @@ def load_model() -> Model:
     print("\n✅ model loaded from disk")
 
     return model
-
-
-# def save_model():
-#
-#    with mlflow.start_run():
-#
-#        params = dict(batch_size=000, row_count=000)
-#        metrics = dict(accuracy=0000)
-#
-#        mlflow.log_params(params)
-#        mlflow.log_metrics(metrics)
-#
-#        log_model(model=dummy_model,
-#                  artifact_path="dummy_model",
-#                  registered_model_name="braintumorclassification")
-#
-#        return None
