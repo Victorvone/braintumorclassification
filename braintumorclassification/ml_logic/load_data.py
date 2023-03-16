@@ -1,11 +1,10 @@
 from tensorflow.keras.utils import image_dataset_from_directory
 
 
-def load_data(directory):
+def load_train_data(directory):
     """
-    loads data from a local directory
+    loads train data from a local directory
     """
-
     train_ds, val_ds = image_dataset_from_directory(
         f"{directory}/Training",
         labels="inferred",
@@ -17,6 +16,13 @@ def load_data(directory):
         color_mode="rgb",
         batch_size=64,
     )
+    return train_ds, val_ds
+
+
+def load_test_data(directory):
+    """
+    loads test data from a local directory
+    """
 
     test_ds = image_dataset_from_directory(
         f"{directory}/Testing",
@@ -28,4 +34,4 @@ def load_data(directory):
         batch_size=64,
     )
 
-    return train_ds, val_ds, test_ds
+    return test_ds
