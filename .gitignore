@@ -9,3 +9,9 @@ dist/
 models/
 
 braintumorclassification/.DS_Store
+.pyc
+**/__pycache__/
+**/notebooks/
+*.png
+*.egg-info
+.DS_Store
