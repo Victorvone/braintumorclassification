@@ -31,6 +31,23 @@ from img_classification import teachable_machine_classification
 im = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/brain.png')
 st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App", page_icon = im)
 
+
+def app():
+    st.markdown("# Application 💻")
+    st.sidebar.markdown("# Application 💻")
+
+def page2():
+    st.markdown("# Team 🧛‍♂️")
+    st.sidebar.markdown("# Team 🧛‍♂️")
+
+page_names_to_funcs = {
+    "Application ": app,
+    "Team": page2,
+    }
+
+selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
+page_names_to_funcs[selected_page]()
+
 col1, col2, col3 = st.columns([6,6,6])
 col1.write("")
 col1.write("")
@@ -84,7 +101,7 @@ with col3, st.expander('Click Here to Classify MRI Scan!'):
 
         st.write("")
         st.write("")
-        st.write("")
+
 
         #st.write("Classifying...")
 
@@ -107,4 +124,4 @@ with col3, st.expander('Click Here to Classify MRI Scan!'):
 
         if label == 2:
 
-            st.write("The MRI scan is healthy")
+            st.success("The MRI scan is healthy")
