@@ -5,11 +5,10 @@ raw_data_test/
 .env
 .vscode/
 braintumorclassification/ml_logic/mlruns/
-braintumorclassification/notebooks/.ipynb_checkpoints/restnet50_aurel-checkpoint.ipynb
 build/
 dist/
 models/
-
 braintumorclassification/.DS_Store
 braintumorclassification.egg-info/*
 */__pycache__/*
+*/.ipynb_checkpoints/*
