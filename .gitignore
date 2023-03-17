@@ -7,6 +7,7 @@ raw_data_test/
 .vscode/
 .env.yaml
 .env.yaml
+*.pyc
 
 braintumorclassification/ml_logic/mlruns/
 braintumorclassification/notebooks/
