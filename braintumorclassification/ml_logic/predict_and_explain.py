@@ -88,7 +88,7 @@ def predict_and_gradcam(model,
     gradcam = GradCAM()
     grid_gradcam = gradcam.explain(image_tuple, model, class_index=class_index)
     # maybe change class_index to variable +
-    gradcam.save(grid_gradcam, "../Visualizations/", "GradCam.png")
+    # gradcam.save(grid_gradcam, "../Visualizations/", "GradCam.png")
     print('Gradcam created and saved in "../Visualizations/GradCam.png"')
 
     return prediction , grid_gradcam
