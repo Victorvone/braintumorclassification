@@ -15,12 +15,13 @@ def initialize_model():
     model = Sequential()
     model.add(base_model)
     model.add(layers.Flatten())
-    model.add(layers.Dense(64, activation = 'relu'))
+    model.add(layers.Dense(64, activation='relu'))
     model.add(layers.Dropout(0.3))
     model.add(layers.Dense(4, activation='softmax'))
 
     base_model.trainable = False
     print("\n✅ model initialized")
+
     return model
 
 

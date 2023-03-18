@@ -7,10 +7,10 @@ import sys
 from fastapi import FastAPI, File, UploadFile
 
 sys.path.append("../")
-from ml_logic.predict_and_explain import predict_and_gradcam
+from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
 
 from tensorflow.keras.models import load_model
-from ml_logic.registry import load_model  # waiting for the Local_registrypaty
+from braintumorclassification.ml_logic.registry import load_model  # waiting for the Local_registrypaty
 
 # import numpy as np
 from prediction import read_image
