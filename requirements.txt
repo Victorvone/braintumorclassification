@@ -17,6 +17,10 @@ glob2
 pickle-mixin
 streamlit
 gdown
+requests_toolbelt
+os
+io
+pydeck
 
 # Install the version of Tensorflow depending on your processor: darwin == Mac, ARM == M1
 # tensorflow-macos==2.10.0; sys_platform == 'darwin' and 'ARM' in platform_version # Mac M-chips
