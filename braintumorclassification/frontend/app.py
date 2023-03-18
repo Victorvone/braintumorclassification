@@ -52,8 +52,9 @@ def process(image, server_url: str):
 
 
 
-im = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/brain.png')
-st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App", page_icon = im)
+#im = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/brain.png')
+#page_icon = im
+st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App")
 
 tab1, tab2= st.tabs(["Application", "Team"])
 
@@ -158,8 +159,11 @@ with tab2:
 
     with col1:
         #st.header("Aydogan")
+        #st.write(os.getcwd())
 
-        image = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aydogan.JPG')
+
+        dirname = os.path.dirname(__file__) #this gets current directory you placed your applications
+        image = Image.open(dirname +'/aydogan.JPG')
 
         # Create container with centered image
         with st.container():
@@ -170,7 +174,8 @@ with tab2:
 
 
     with col2:
-        image2 = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/victor.JPG')
+        image2 = Image.open(dirname +'/victor.JPG')
+
         #st.header("Victor")
 
         #st.image(image2, width=250)
@@ -184,7 +189,8 @@ with tab2:
     with col3:
         #st.header("Aurélien Biais")
 
-        image3 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aurelien.jpg')
+        image3 = Image.open(dirname +'/aurelien.jpg')
+
 
         with st.container():
             st.markdown("<h1 style='text-align: center'>Aurélien</h1>", unsafe_allow_html=True)
@@ -192,12 +198,13 @@ with tab2:
             col3.write("")
             col3.write("")
             col3.info('Data Analytics Lead @recare')
-            st.markdown('[Recare](https://github.com/recare)')
+            st.markdown('[Github](https://github.com/abiais)')
             st.image(image3, use_column_width=True)
         #st.image(image3, width=250)
     with col4:
         #st.header("Aurélien Biais")
-        image4 = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/ivan.JPG')
+        image4 = Image.open(dirname +'/ivan.JPG')
+
         with st.container():
             st.markdown("<h1 style='text-align: center'>Ivan</h1>", unsafe_allow_html=True)
             col4.info('Add Info')
