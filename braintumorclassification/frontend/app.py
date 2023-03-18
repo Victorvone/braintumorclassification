@@ -184,7 +184,7 @@ with tab2:
     with col3:
         #st.header("Aurélien Biais")
 
-        image3 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aurelien.jpg')
+        image3 = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aurelien.jpg')
 
         with st.container():
             st.markdown("<h1 style='text-align: center'>Aurélien</h1>", unsafe_allow_html=True)
