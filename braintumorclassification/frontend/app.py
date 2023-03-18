@@ -131,7 +131,7 @@ with tab2:
         # Create container with centered image
         with st.container():
             st.markdown("<h1 style='text-align: center'>Aydogan</h1>", unsafe_allow_html=True)
-            col1.info('Geospatial data scientist')
+            col1.info('Researcher on Geospatial Analysis')
             st.markdown('[Github](https://github.com/aydogan22)')
             st.image(image, use_column_width=True)
 
@@ -144,25 +144,28 @@ with tab2:
 
         with st.container():
             st.markdown("<h1 style='text-align: center'>Victor</h1>", unsafe_allow_html=True)
+            col2.info('Add Info')
+            st.markdown('[Github](https://github.com/Victorvone)')
             st.image(image2, use_column_width=True)
-        col2.info('Add Info')
+
     with col3:
         #st.header("Aurélien Biais")
-        col3.write("")
-        col3.write("")
-        col3.write("")
         image3 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aurelien.jpg')
         with st.container():
-            st.markdown("<h1 style='text-align: center'>Aurélien Biais</h1>", unsafe_allow_html=True)
+            st.markdown("<h1 style='text-align: center'>Aurélien</h1>", unsafe_allow_html=True)
+            col3.write("")
+            col3.write("")
+            col3.write("")
+            col3.info('Data Analytics Lead @recare')
+            st.markdown('[Recare](https://github.com/recare)')
             st.image(image3, use_column_width=True)
-        col3.info('Data Analytics Lead @recare')
-        st.markdown('[Recare](https://github.com/recare)')
         #st.image(image3, width=250)
     with col4:
         #st.header("Aurélien Biais")
         image4 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/ivan.JPG')
         with st.container():
-            st.markdown("<h1 style='text-align: center'>Ivan Andjelkovic</h1>", unsafe_allow_html=True)
+            st.markdown("<h1 style='text-align: center'>Ivan</h1>", unsafe_allow_html=True)
+            col4.info('Add Info')
+            st.markdown('[Github](https://github.com/IvanAndjelkovic)')
             st.image(image4, use_column_width=True)
         #st.image(image4, width=250)
-        col4.info('Add Info')
