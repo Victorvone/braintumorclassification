@@ -1,18 +1,7 @@
-# run in main folder following command to start api:
-# uvicorn userinterface.app:app --port 8080 --reload
-
-import os
 import sys
-
 from fastapi import FastAPI, File, UploadFile
-
-sys.path.append("../")
-from ml_logic.predict_and_explain import predict_and_gradcam
-
-from tensorflow.keras.models import load_model
-from ml_logic.registry import load_model  # waiting for the Local_registrypaty
-
-# import numpy as np
+from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
+from braintumorclassification.ml_logic.registry import load_model  # waiting for the Local_registrypaty
 from prediction import read_image
 from prediction import preprocess
 from uvicorn import run
@@ -20,33 +9,35 @@ from starlette.responses import Response
 import io
 from PIL import Image
 
-
+sys.path.append("../")
+# run in main folder following command to start api:
+# uvicorn userinterface.app:app --port 8080 --reload
 
 
 # Fill in the classes
 classes = ["glioma", "meningioma", "notumor", "pituitary"]
 # Fill in the Model
-filename="/home/ivana/code/Victorvone/braintumorclassification/models/EfficientNetv2.h5"
+filename = "/home/ivana/code/Victorvone/braintumorclassification/models/EfficientNetv2.h5"
 # filename = "/EfficientNetv2.h5" # Waiting for LOCAL_REGISTRY_PATH
 
 app = FastAPI()
 # app.state.model = load_model(filename, compile=False)
 app.state.model = load_model()
-app.state.model.compile(
-        loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
-       )
+app.state.model.compile(loss="categorical_crossentropy",
+                        optimizer="adam",
+                        metrics=["accuracy"])
+
 
 @app.post("/predict4")
 async def predict(file: UploadFile = File(...)):
-    #Read the file uploaded by user
+    # Read the file uploaded by user
     image = read_image(await file.read())
-    #after doing preprocessing
+    # after doing preprocessing
     image = preprocess(image)
 
-    #make prediction
+    # make prediction
 
-    res_total = predict_and_gradcam(app.state.model,image)
-
+    res_total = predict_and_gradcam(app.state.model, image)
 
     # getting a expl_image
 
@@ -63,13 +54,13 @@ async def predict(file: UploadFile = File(...)):
 async def predict(file: UploadFile = File(...)):
     # getting a string
     image = read_image(await file.read())
-    #after doing preprocessing
+    # after doing preprocessing
     image = preprocess(image)
-    #make prediction
+    # make prediction
 
 
-    res_total = predict_and_gradcam(app.state.model,image)
-    res_string = predict_and_gradcam(app.state.model,image)[0][0]
+    res_total = predict_and_gradcam(app.state.model, image)
+    res_string = predict_and_gradcam(app.state.model, image)[0][0]
     max_value = res_string.max()
     # max_value = "{0:.0}%".format(max_value)
     max_position = res_string.argmax()
@@ -77,8 +68,6 @@ async def predict(file: UploadFile = File(...)):
     tumor_type = classes[max_position].capitalize()
     result_str = f'{tumor_type} has been detected with the probability {max_value:.5%} '
     return result_str
-
-
 
 @app.get("/")
 def root():
