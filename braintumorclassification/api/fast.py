@@ -10,7 +10,7 @@ sys.path.append("../")
 from ml_logic.predict_and_explain import predict_and_gradcam
 
 from tensorflow.keras.models import load_model
-# from ml_logic.registry import load_model  # waiting for the Local_registrypaty
+from ml_logic.registry import load_model  # waiting for the Local_registrypaty
 
 # import numpy as np
 from prediction import read_image
@@ -27,11 +27,11 @@ from PIL import Image
 classes = ["glioma", "meningioma", "notumor", "pituitary"]
 # Fill in the Model
 filename="/home/ivana/code/Victorvone/braintumorclassification/models/EfficientNetv2.h5"
-# filename = "models/EfficientNetv2.h5" # Waiting for LOCAL_REGISTRY_PATH
+# filename = "/EfficientNetv2.h5" # Waiting for LOCAL_REGISTRY_PATH
 
 app = FastAPI()
-app.state.model = load_model(filename, compile=False)
-# app.state.model = load_model() Waiting for LOCAL_REGISTRY_PATH
+# app.state.model = load_model(filename, compile=False)
+app.state.model = load_model()
 app.state.model.compile(
         loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
        )

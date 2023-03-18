@@ -189,7 +189,9 @@ with tab2:
     with col3:
         #st.header("Aurélien Biais")
 
+
         image3 = Image.open(dirname +'/aurelien.jpg')
+
 
 
         with st.container():
