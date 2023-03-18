@@ -32,10 +32,11 @@ from img_classification import teachable_machine_classification
 # interact with FastAPI endpoint
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
-backend = "http://127.0.0.1:8000/predict4"
-backend2 = "http://127.0.0.1:8000/predict5"
+backend = "https://btc-w3zkxihrsq-ey.a.run.app/predict4"
+backend2 = "https://btc-w3zkxihrsq-ey.a.run.app/predict5"
 
 # Function for fastapi interface
+
 
 def process(image, server_url: str):
 
@@ -46,17 +47,12 @@ def process(image, server_url: str):
     )
     return r
 
+dirname = os.path.dirname(__file__) #this gets current directory you placed your applications
+im = Image.open(dirname+'/brain.png')
 
+st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App", page_icon = im)
 
-
-
-
-
-#im = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/brain.png')
-#page_icon = im
-st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App")
-
-tab1, tab2= st.tabs(["Application", "Team"])
+tab1, tab2= st.tabs(["💻 Application","👉Team"])
 
 with tab1:
 
@@ -78,7 +74,7 @@ with tab1:
     col1.write("")
     col1.write("")
 
-    col1.title("Choose a brain MRI ...")
+    col1.title("Upload a brain MRI 📥")
     uploaded_file = col1.file_uploader("", type="jpg")
     if uploaded_file:
 
@@ -162,29 +158,34 @@ with tab2:
         #st.write(os.getcwd())
 
 
-        dirname = os.path.dirname(__file__) #this gets current directory you placed your applications
+
         image = Image.open(dirname +'/aydogan.JPG')
 
         # Create container with centered image
         with st.container():
-            st.markdown("<h1 style='text-align: center'>Aydogan</h1>", unsafe_allow_html=True)
+            st.markdown("<h1 style='text-align: center'><a href='https://github.com/aydogan22'>Aydoğan</a></h1>", unsafe_allow_html=True)
+
             col1.info('Researcher on Geospatial Analysis')
-            st.markdown('[Github](https://github.com/aydogan22)')
+            #st.markdown('[Github](https://github.com/aydogan22)')
             st.image(image, use_column_width=True)
+            #st.subheader('Researcher on Geospatial Analysis')
+
+
 
 
     with col2:
-        image2 = Image.open(dirname +'/victor.JPG')
+        image2 = Image.open(dirname +'/victor.jpg')
 
         #st.header("Victor")
 
         #st.image(image2, width=250)
 
         with st.container():
-            st.markdown("<h1 style='text-align: center'>Victor</h1>", unsafe_allow_html=True)
-            col2.info('Add Info')
-            st.markdown('[Github](https://github.com/Victorvone)')
+            st.markdown("<h1 style='text-align: center'><a href='https://github.com/Victorvone'>Victor</a></h1>", unsafe_allow_html=True)
+            col2.info('Data-geek and Psychologist (M.Sc.)')
+            #st.markdown('[Github](https://github.com/Victorvone)')
             st.image(image2, use_column_width=True)
+
 
     with col3:
         #st.header("Aurélien Biais")
@@ -195,21 +196,20 @@ with tab2:
 
 
         with st.container():
-            st.markdown("<h1 style='text-align: center'>Aurélien</h1>", unsafe_allow_html=True)
-            col3.write("")
-            col3.write("")
-            col3.write("")
+            st.markdown("<h1 style='text-align: center'><a href='https://github.com/abiais'>Aurélien</a></h1>", unsafe_allow_html=True)
+
             col3.info('Data Analytics Lead @recare')
-            st.markdown('[Github](https://github.com/abiais)')
+            #st.markdown('[Github](https://github.com/abiais)')
             st.image(image3, use_column_width=True)
-        #st.image(image3, width=250)
+
+
+
     with col4:
         #st.header("Aurélien Biais")
-        image4 = Image.open(dirname +'/ivan.JPG')
+        image4 = Image.open(dirname +'/ivan.jpg')
 
         with st.container():
-            st.markdown("<h1 style='text-align: center'>Ivan</h1>", unsafe_allow_html=True)
-            col4.info('Add Info')
-            st.markdown('[Github](https://github.com/IvanAndjelkovic)')
+            st.markdown("<h1 style='text-align: center'><a href='https://github.com/IvanAndjelkovic'>Ivan</a></h1>", unsafe_allow_html=True)
+            col4.info('Head of Controlling')
+            #st.markdown('[Github](https://github.com/IvanAndjelkovic)')
             st.image(image4, use_column_width=True)
-        #st.image(image4, width=250)
