@@ -23,11 +23,36 @@ from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.models import load_model
 import requests
 import time
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+import io
 
 
 from img_classification import teachable_machine_classification
 
-im = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/brain.png')
+# interact with FastAPI endpoint
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+
+backend = "http://127.0.0.1:8000/predict4"
+backend2 = "http://127.0.0.1:8000/predict5"
+
+# Function for fastapi interface
+
+def process(image, server_url: str):
+
+    m = MultipartEncoder(fields={"file": ("filename", image, "image/jpeg")})
+
+    r = requests.post(
+        server_url, data=m, headers={"Content-Type": m.content_type}, timeout=8000
+    )
+    return r
+
+
+
+
+
+
+
+im = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/brain.png')
 st.set_page_config(layout="wide", page_title="Brain Tumor Classification and Explainability App", page_icon = im)
 
 tab1, tab2= st.tabs(["Application", "Team"])
@@ -88,34 +113,42 @@ with tab1:
             image = Image.open(uploaded_file)
             image = image.resize((255, 255))
 
-            st.image(image, use_column_width=True)
+            # Result of the interface
+            segments = process(uploaded_file,backend)
+            segments2 = process(uploaded_file,backend2)
+            exp_image = Image.open(io.BytesIO(segments.content)).convert("RGB")
+            result_string = segments2.text
+
+            st.image(exp_image, use_column_width=True)
 
             st.write("")
             st.write("")
 
+
+            st.error(result_string, icon ='☠')
 
             #st.write("Classifying...")
 
-            model_EfficientNetv2 = '/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/EfficientNetv2.h5'
+            # model_EfficientNetv2 = '/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/EfficientNetv2.h5'
 
-            label = teachable_machine_classification(image, model_EfficientNetv2)
+            # label = teachable_machine_classification(image, model_EfficientNetv2)
 
-            if label == 0:
+            # if label == 0:
 
-                st.error("Meningioma has been detected!", icon ='☠')
+            #     st.error("Meningioma has been detected!", icon ='☠')
 
-            if label == 1:
+            # if label == 1:
 
-                st.error("Meningioma has been detected", icon ='☠')
+            #     st.error("Meningioma has been detected", icon ='☠')
 
-            if label == 3:
+            # if label == 3:
 
-                st.error("Pituitary has been detected", icon ='☠')
+            #     st.error("Pituitary has been detected", icon ='☠')
 
 
-            if label == 2:
+            # if label == 2:
 
-                st.success("The MRI scan is healthy")
+            #     st.success("The MRI scan is healthy")
 
 with tab2:
 
@@ -126,7 +159,7 @@ with tab2:
     with col1:
         #st.header("Aydogan")
 
-        image = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aydogan.JPG')
+        image = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aydogan.JPG')
 
         # Create container with centered image
         with st.container():
@@ -137,7 +170,7 @@ with tab2:
 
 
     with col2:
-        image2 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/victor.JPG')
+        image2 = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/victor.JPG')
         #st.header("Victor")
 
         #st.image(image2, width=250)
@@ -150,7 +183,9 @@ with tab2:
 
     with col3:
         #st.header("Aurélien Biais")
+
         image3 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/aurelien.jpg')
+
         with st.container():
             st.markdown("<h1 style='text-align: center'>Aurélien</h1>", unsafe_allow_html=True)
             col3.write("")
@@ -162,7 +197,7 @@ with tab2:
         #st.image(image3, width=250)
     with col4:
         #st.header("Aurélien Biais")
-        image4 = Image.open('/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/ivan.JPG')
+        image4 = Image.open('/home/ivana/code/Victorvone/braintumorclassification/braintumorclassification/frontend/ivan.JPG')
         with st.container():
             st.markdown("<h1 style='text-align: center'>Ivan</h1>", unsafe_allow_html=True)
             col4.info('Add Info')
