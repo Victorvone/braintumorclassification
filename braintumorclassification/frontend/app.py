@@ -92,14 +92,26 @@ with tab1:
             exp_image = Image.open(io.BytesIO(segments.content)).convert("RGB")
             result_string = segments2.text
 
-            st.image(exp_image, use_column_width=True)
+            # st.image(exp_image, use_column_width=True)
 
             st.write("")
             st.write("")
 
-            st.error(result_string, icon="☠")
 
-            # st.write("Classifying...")
+            dirname1 = os.path.dirname(__file__)
+            image_no = Image.open(dirname1 +'/OIPres.jpg')
+
+            if result_string[1:3] == 'No':
+                st.image(image_no, use_column_width=True)
+                st.success(result_string)
+            else:
+
+               st.image(exp_image, use_column_width=True)
+               st.error(result_string, icon ='☠')
+
+
+            #st.write("Classifying...")
+
 
             # model_EfficientNetv2 = '/home/aydogan/code/Victorvone/braintumorclassification/braintumorclassification/frontend/EfficientNetv2.h5'
 

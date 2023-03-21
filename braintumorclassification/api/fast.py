@@ -1,9 +1,9 @@
 import sys
 from fastapi import FastAPI, File, UploadFile
 from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
-from braintumorclassification.ml_logic.registry import (
-    load_model,
-)  # waiting for the Local_registrypaty
+
+from braintumorclassification.ml_logic.registry import load_model
+
 from braintumorclassification.api.prediction import read_image
 from braintumorclassification.api.prediction import preprocess
 from uvicorn import run
@@ -18,6 +18,7 @@ sys.path.append("../")
 
 # Fill in the classes
 classes = ["glioma", "meningioma", "notumor", "pituitary"]
+
 
 app = FastAPI()
 app.state.model = load_model()
@@ -56,15 +57,25 @@ async def predict_string(file: UploadFile = File(...)):
     image = preprocess(image)
     # make prediction
 
-    res_total = predict_and_gradcam(app.state.model, image)
-    res_string = res_total[0][0]
+
+
+
+    res_string = predict_and_gradcam(app.state.model, image)[0][0]
+
     max_value = res_string.max()
     # max_value = "{0:.0}%".format(max_value)
     max_position = res_string.argmax()
 
     tumor_type = classes[max_position].capitalize()
-    result_str = f"{tumor_type} has been detected with the probability {max_value:.5%} "
-    return result_str
+
+    if max_position ==2:
+        result_string = f'No tumor has been detected with the probability of {max_value:.5%} '
+    else:
+        result_string = f'{tumor_type} tumor has been detected with the probability of {max_value:.5%} '
+
+    return result_string
+
+
 
 
 @app.get("/")
