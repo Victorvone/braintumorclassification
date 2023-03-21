@@ -1,8 +1,9 @@
 import sys
 from fastapi import FastAPI, File, UploadFile
 from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
-# from tensorflow.keras.models import load_model as load_model1
-from braintumorclassification.ml_logic.registry import load_model  # waiting for the Local_registrypaty
+
+from braintumorclassification.ml_logic.registry import load_model
+
 from braintumorclassification.api.prediction import read_image
 from braintumorclassification.api.prediction import preprocess
 from uvicorn import run
@@ -20,15 +21,14 @@ classes = ["glioma", "meningioma", "notumor", "pituitary"]
 
 
 app = FastAPI()
-# app.state.model = load_model(filename, compile=False)
 app.state.model = load_model()
-app.state.model.compile(loss="categorical_crossentropy",
-                        optimizer="adam",
-                        metrics=["accuracy"])
+app.state.model.compile(
+    loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+)
 
 
 @app.post("/predict4")
-async def predict(file: UploadFile = File(...)):
+async def predict_image(file: UploadFile = File(...)):
     # Read the file uploaded by user
     image = read_image(await file.read())
     # after doing preprocessing
@@ -41,7 +41,7 @@ async def predict(file: UploadFile = File(...)):
     # getting a expl_image
 
     exp_image = res_total[1]
-    r = Image.fromarray(exp_image, 'RGB')
+    r = Image.fromarray(exp_image, "RGB")
 
     bytes_io = io.BytesIO()
     r.save(bytes_io, format="PNG")
@@ -50,7 +50,7 @@ async def predict(file: UploadFile = File(...)):
 
 
 @app.post("/predict5")
-async def predict(file: UploadFile = File(...)):
+async def predict_string(file: UploadFile = File(...)):
     # getting a string
     image = read_image(await file.read())
     # after doing preprocessing
@@ -59,18 +59,23 @@ async def predict(file: UploadFile = File(...)):
 
 
 
+
     res_string = predict_and_gradcam(app.state.model, image)[0][0]
+
     max_value = res_string.max()
     # max_value = "{0:.0}%".format(max_value)
     max_position = res_string.argmax()
 
     tumor_type = classes[max_position].capitalize()
+
     if max_position ==2:
         result_string = f'No tumor has been detected with the probability of {max_value:.5%} '
     else:
         result_string = f'{tumor_type} tumor has been detected with the probability of {max_value:.5%} '
 
     return result_string
+
+
 
 
 @app.get("/")
