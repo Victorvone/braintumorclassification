@@ -1,6 +1,10 @@
-from braintumorclassification.ml_logic.model import initialize_model, compile_model, train_model, evaluate_model
+from braintumorclassification.ml_logic.model import (
+    initialize_model,
+    compile_model,
+    train_model,
+    evaluate_model,
+)
 from braintumorclassification.ml_logic.registry import load_model, save_model
-from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
 from braintumorclassification.ml_logic.load_data import load_train_data, load_test_data
 from braintumorclassification.ml_logic.params import LEARNING_RATE, METRIC, BATCH_SIZE, EPOCHS, FLIP, ZOOM
 
@@ -12,7 +16,7 @@ def train():
     Compute validation metrics
     """
     # Load train data
-    train_ds, val_ds = load_train_data('braintumorclassification/raw_data')
+    train_ds, val_ds = load_train_data("./raw_data")
 
     # Initialize model
     model = initialize_model(flip=bool(FLIP), zoom=bool(ZOOM))
@@ -21,10 +25,12 @@ def train():
     model = compile_model(model, learning_rate=LEARNING_RATE, metric=METRIC)
 
     # Train model
-    model, history = train_model(model, train_ds, val_ds, batch_size=BATCH_SIZE, epochs=EPOCHS)
+    model, history = train_model(
+        model, train_ds, val_ds, batch_size=BATCH_SIZE, epochs=EPOCHS
+    )
 
-    params = {'batch_size': BATCH_SIZE}
-    metrics = {'accuracy': history[1]}
+    params = {"batch_size": BATCH_SIZE}
+    metrics = {"accuracy": history[1]}
 
     # Save model
     save_model(model, params, metrics)
@@ -38,7 +44,7 @@ def evaluate():
     """
 
     # Load test data
-    test_ds = load_test_data('braintumorclassification/raw_data')
+    test_ds = load_test_data("braintumorclassification/raw_data")
 
     # Load model
     model = load_model()
