@@ -2,3 +2,5 @@ LEARNING_RATE = 0.001
 METRIC = ['accuracy']
 BATCH_SIZE = 64
 EPOCHS = 100
+ZOOM = True
+FLIP = True
