@@ -1,7 +1,7 @@
 import sys
 from fastapi import FastAPI, File, UploadFile
 from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
-
+import math
 from braintumorclassification.ml_logic.registry import load_model
 
 from braintumorclassification.api.prediction import read_image
@@ -65,13 +65,13 @@ async def predict_string(file: UploadFile = File(...)):
     max_value = res_string.max()
     # max_value = "{0:.0}%".format(max_value)
     max_position = res_string.argmax()
-
+    round_max_value = math.floor(max_value*10000)/10000
     tumor_type = classes[max_position].capitalize()
 
     if max_position ==2:
-        result_string = f'No tumor has been detected with the probability of {max_value:.5%} '
+        result_string = f'No tumor : {round_max_value:.2%} '
     else:
-        result_string = f'{tumor_type} tumor has been detected with the probability of {max_value:.5%} '
+        result_string = f'{tumor_type} tumor : {round_max_value:.2%} '
 
     return result_string
 
