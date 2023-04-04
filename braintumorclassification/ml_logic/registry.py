@@ -1,15 +1,11 @@
 import mlflow
 from mlflow.keras import log_model
-
 import glob2
 import time
 import os
 import pickle
-
 from colorama import Fore, Style
-
 from tensorflow.keras import Model, models
-
 import gdown
 
 

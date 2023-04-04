@@ -1,9 +1,4 @@
-from braintumorclassification.ml_logic.model import (
-    initialize_model,
-    compile_model,
-    train_model,
-    evaluate_model,
-)
+from braintumorclassification.ml_logic.model import initialize_model, compile_model, train_model, evaluate_model
 from braintumorclassification.ml_logic.registry import load_model, save_model
 from braintumorclassification.ml_logic.load_data import load_train_data, load_test_data
 from braintumorclassification.ml_logic.params import LEARNING_RATE, METRIC, BATCH_SIZE, EPOCHS, FLIP, ZOOM
@@ -53,19 +48,6 @@ def evaluate():
     return metrics
 
 
-# def pred(image: np.array()):
-#     """
-#     Make a prediction using the latest trained model
-#     """
-#     # Load model
-#     model = load_model()
-
-#     # Predict and explain
-#     prediction , grid_gradcam = predict_and_gradcam(model, image)
-#     return prediction , grid_gradcam
-
-
 if __name__ == "__main__":
     train()
-    # pred()
     evaluate()
