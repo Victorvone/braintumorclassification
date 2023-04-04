@@ -3,9 +3,7 @@ from fastapi import FastAPI, File, UploadFile
 from braintumorclassification.ml_logic.predict_and_explain import predict_and_gradcam
 import math
 from braintumorclassification.ml_logic.registry import load_model
-
-from braintumorclassification.api.prediction import read_image
-from braintumorclassification.api.prediction import preprocess
+from braintumorclassification.api.prediction import read_image, preprocess
 from uvicorn import run
 from starlette.responses import Response
 import io
@@ -15,10 +13,8 @@ sys.path.append("../")
 # run in main folder following command to start api:
 # uvicorn userinterface.app:app --port 8080 --reload
 
-
 # Fill in the classes
 classes = ["glioma", "meningioma", "notumor", "pituitary"]
-
 
 app = FastAPI()
 app.state.model = load_model()
@@ -57,9 +53,6 @@ async def predict_string(file: UploadFile = File(...)):
     image = preprocess(image)
     # make prediction
 
-
-
-
     res_string = predict_and_gradcam(app.state.model, image)[0][0]
 
     max_value = res_string.max()
@@ -74,8 +67,6 @@ async def predict_string(file: UploadFile = File(...)):
         result_string = f'{tumor_type} tumor : {round_max_value:.2%} '
 
     return result_string
-
-
 
 
 @app.get("/")
