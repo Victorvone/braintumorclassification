@@ -1,7 +1,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Frontend]](braintumorclassification/screenshots/title_picture.png)
+[Frontend](braintumorclassification/screenshots/title_picture.png)]
 
 Convolutional networks have been widely used for the classification of objects in pictures. The use of such algorithms for clinical
 decision assistants have been on the rise with models performing on par or better than humans in terms of accuracy for diagnosing diseases.
@@ -31,9 +31,9 @@ Grad-cam turned out to provide us the best results in terms of interpretability.
 <!-- CONTACT -->
 ## Contributors
 
-Victor von Eisenhart-Rothe - [LinkedIn](https://www.linkedin.com/in/victor-von-eisenhart-rothe/) - https://github.com/Victorvone
-Aurélien Biais - [LinkedIn](https://www.linkedin.com/in/aur%C3%A9lien-biais-a41360a3/) - https://github.com/abiais
-Ivan Andjelkovic - [LinkedIn](https://www.linkedin.com/in/ivan-andjelkovic-b6427029/) - https://github.com/IvanAndjelkovic
-Aydoğan Avcıoğlu - [LinkedIn](https://www.linkedin.com/in/aydo%C4%9Fan-avc%C4%B1o%C4%9Flu-891466173/) - https://github.com/aydogan22
+Victor von Eisenhart-Rothe - [LinkedIn](https://www.linkedin.com/in/victor-von-eisenhart-rothe/) - [Github](https://github.com/Victorvone)
+Aurélien Biais - [LinkedIn](https://www.linkedin.com/in/aur%C3%A9lien-biais-a41360a3/) - [Github](https://github.com/abiais)
+Ivan Andjelkovic - [LinkedIn](https://www.linkedin.com/in/ivan-andjelkovic-b6427029/) - [Github](https://github.com/IvanAndjelkovic)
+Aydoğan Avcıoğlu - [LinkedIn](https://www.linkedin.com/in/aydo%C4%9Fan-avc%C4%B1o%C4%9Flu-891466173/) - [Github](https://github.com/aydogan22)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
