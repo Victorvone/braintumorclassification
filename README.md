@@ -28,11 +28,12 @@ This repository includes the following features:
 
 The following technologies were used in this project:
 
-- tensorflow.keras
-- tf-explain
+- Tensorflow.keras
+- Tf-explain
 - FastAPI
 - Uvicorn
 - MLflow
+- Google cloud storage
 
 <p align="right"> <a href="#top">Back to top</a>
 </p>
