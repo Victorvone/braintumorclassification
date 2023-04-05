@@ -16,6 +16,5 @@ models/
 braintumorclassification.egg-info/
 **/__pycache__/
 **/.ipynb_checkpoints/
-*.png
 *.pyc
 notebooks
