@@ -9,6 +9,7 @@ raw_data_test/
 *.pyc
 braintumorclassification/ml_logic/mlruns/
 braintumorclassification/notebooks/
+braintumorclassification/Visualizations/
 build/
 dist/
 models/
@@ -18,4 +19,3 @@ braintumorclassification.egg-info/
 *.png
 *.pyc
 notebooks
-Visualizations
