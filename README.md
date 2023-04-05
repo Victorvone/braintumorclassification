@@ -1,6 +1,6 @@
 # Braintumorclassification and explainability visualizations through convolutional neural networks and grad-cam
 
-[Frontend](braintumorclassification/screenshots/title_picture.png)]
+![Frontend](braintumorclassification/screenshots/title_picture.png)
 
 ## Main Idea, Reason and Approach of the Project
 
@@ -39,7 +39,7 @@ The following technologies were used in this project:
 To install and run this project, follow these steps:
 
 - Clone the repository
-- Install the necessary dependencies using pip install -r requirements.txt
+- Install the necessary dependencies using `pip install -r requirements.txt`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
