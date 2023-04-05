@@ -32,7 +32,24 @@ The following technologies were used in this project:
 - Uvicorn
 - MLflow
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Installation
+
+To install and run this project, follow these steps:
+
+- Clone the repository
+- Install the necessary dependencies using pip install -r requirements.txt
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+To use this project, follow these steps:
+
+- Prepare the dataset and preprocess it using the provided functions
+- Initiate, compile, train and evaluate the model through the functions provided in `model.py`
+- Use the model to predict on new data and provide explainability visualizations through the functions provided in `predict_and_explain.py`
+- To make use of the API as well as saving and loading the model through MLFlow and GCloud, you have to define the corresponding parameters in your `.env` file
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -43,8 +60,7 @@ Aurélien Biais - [LinkedIn](https://www.linkedin.com/in/aur%C3%A9lien-biais-a41
 <br>
 Ivan Andjelkovic - [LinkedIn](https://www.linkedin.com/in/ivan-andjelkovic-b6427029/) - [Github](https://github.com/IvanAndjelkovic)
 <br>
-Aydoğan Avcıoğlu - [LinkedIn](https://www.linkedin.com/in/aydo%C4%9Fan-avc%C4%B1o%C4%9Flu-891466173/) - [Github](https://github.com/
-aydogan22)
+Aydoğan Avcıoğlu - [LinkedIn](https://www.linkedin.com/in/aydo%C4%9Fan-avc%C4%B1o%C4%9Flu-891466173/) - [Github](https://github.com/aydogan22)
 <br>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
