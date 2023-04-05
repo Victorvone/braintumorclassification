@@ -9,13 +9,12 @@ raw_data_test/
 *.pyc
 braintumorclassification/ml_logic/mlruns/
 braintumorclassification/notebooks/
+braintumorclassification/Visualizations/
 build/
 dist/
 models/
 braintumorclassification.egg-info/
 **/__pycache__/
 **/.ipynb_checkpoints/
-*.png
 *.pyc
 notebooks
-Visualizations
