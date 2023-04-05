@@ -8,14 +8,14 @@ raw_data_test/
 .env.yaml
 *.pyc
 braintumorclassification/ml_logic/mlruns/
-braintumorclassification/notebooks/
+braintumorclassification/jupyternotebooks/
 braintumorclassification/Visualizations/
 build/
 dist/
 models/
+notebooks/
 braintumorclassification.egg-info/
 **/__pycache__/
 **/.ipynb_checkpoints/
 *.pyc
 *.ipynb
-notebooks/
